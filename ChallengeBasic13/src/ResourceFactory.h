@@ -9,6 +9,6 @@ class ResourceFactory :
 {
 public:
 	ResourceFactory() = default;
-	std::unique_ptr<Resource> Create(const SceneType type);
+	std::shared_ptr<Resource> Create(const SceneType type);
 };
 

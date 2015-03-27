@@ -9,6 +9,7 @@ type(SceneType::TITLE),
 scene(Create(type))
 {
 	scene->Load(type);
+	scene->Start();
 }
 
 SceneManager& SceneManager::GetInstance(){

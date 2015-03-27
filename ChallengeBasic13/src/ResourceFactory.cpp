@@ -4,16 +4,16 @@
 #include <unordered_map>
 #include <functional>
 
-std::unique_ptr<Resource> ResourceFactory::Create(const SceneType type){
-	static const std::unordered_map<SceneType,std::function<std::unique_ptr<Resource>()>> resource_list = {
+std::shared_ptr<Resource> ResourceFactory::Create(const SceneType type){
+	static const std::unordered_map<SceneType, std::function<std::shared_ptr<Resource>()>> resource_list = {
 		{
 			SceneType::TITLE,
-			[]{return std::make_unique<ResourceTitle>(); }
+			[]{return std::make_shared<ResourceTitle>(); }
 		},
 		{
 			SceneType::STAGE,
-			[]{return std::make_unique<ResourceStage>(); }
+			[]{return std::make_shared<ResourceStage>(); }
 		}
 	};
-	return std::move((resource_list.find(type))->second());
+	return (resource_list.find(type))->second();
 }

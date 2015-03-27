@@ -13,11 +13,12 @@ class Scene
 	SceneType type;
 protected:
 	SceneType Type()const{ return type; }
-	std::unique_ptr<Resource>resource;
+	std::shared_ptr<Resource>resource;
 public:
 	Scene() = default;
 	virtual ~Scene() = default;
 
+	virtual void Start(){ return; }
 	virtual SceneType Update() = 0;
 	virtual void Draw() = 0;
 	void LoadScene(const SceneType type){ this->type = type; }
