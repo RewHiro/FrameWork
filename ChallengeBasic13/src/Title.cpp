@@ -6,6 +6,9 @@ Title::Title()
 }
 
 SceneType Title::Update(){
+	if(Application::isPushButton(Mouse::LEFT)){
+		LoadScene(SceneType::STAGE);
+	}
 	return Type();
 }
 

@@ -6,8 +6,8 @@
 class SceneManager
 {
 	SceneType type;
-	std::shared_ptr<Scene> scene;
-	std::shared_ptr<Scene> Create(const SceneType type);
+	std::unique_ptr<Scene> scene;
+	std::unique_ptr<Scene> Create(const SceneType type);
 
 	SceneManager();
 public:

@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "Title.h"
+#include "Stage.h"
 #include <unordered_map>
 #include <functional>
 
@@ -7,7 +8,7 @@ SceneManager::SceneManager() :
 type(SceneType::TITLE),
 scene(Create(type))
 {
-	scene->LoadScene(type);
+	scene->Load(type);
 }
 
 SceneManager& SceneManager::GetInstance(){
@@ -22,16 +23,20 @@ void SceneManager::Update(){
 	if (type == now_type)return;
 	scene = Create(now_type);
 	type = now_type;
-	scene->LoadScene(type);
+	scene->Load(type);
 	
 }
 
-std::shared_ptr<Scene> SceneManager::Create(const SceneType type){
-	static const std::unordered_map<SceneType,std::function<std::shared_ptr<Scene>()>> scene_list = {
+std::unique_ptr<Scene> SceneManager::Create(const SceneType type){
+	static const std::unordered_map<SceneType,std::function<std::unique_ptr<Scene>()>> scene_list = {
 		{
 			SceneType::TITLE,
-			[]{return std::make_shared<Title>(); }
+			[]{return std::make_unique<Title>(); }
+		},
+		{
+			SceneType::STAGE,
+			[]{return std::make_unique<Stage>(); }
 		}
 	};
-	return (scene_list.find(type))->second();
+	return std::move((scene_list.find(type))->second());
 }

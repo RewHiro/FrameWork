@@ -3,6 +3,7 @@
 class Resource : private Uncopyable
 {
 public:
-	Resource();
+	Resource() = default;
+	virtual ~Resource() = default;
 };
 
