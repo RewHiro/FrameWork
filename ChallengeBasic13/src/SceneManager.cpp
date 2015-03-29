@@ -8,8 +8,7 @@ SceneManager::SceneManager() :
 type(SceneType::TITLE),
 scene(Create(type))
 {
-	scene->Load(type);
-	scene->Start();
+	Load();
 }
 
 SceneManager& SceneManager::GetInstance(){
@@ -24,8 +23,7 @@ void SceneManager::Update(){
 	if (type == now_type)return;
 	scene = Create(now_type);
 	type = now_type;
-	scene->Load(type);
-	
+	Load();
 }
 
 std::unique_ptr<Scene> SceneManager::Create(const SceneType type){
@@ -40,4 +38,9 @@ std::unique_ptr<Scene> SceneManager::Create(const SceneType type){
 		}
 	};
 	return std::move((scene_list.find(type))->second());
+}
+
+void SceneManager::Load(){
+	scene->Load(type);
+	scene->Start();
 }

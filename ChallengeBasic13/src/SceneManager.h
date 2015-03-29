@@ -13,4 +13,6 @@ class SceneManager
 public:
 	static SceneManager& GetInstance();
 	void Update();
+private:
+	void Load();
 };
