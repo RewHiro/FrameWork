@@ -1,14 +1,24 @@
 #include "Title.h"
 #include "Application.h"
+#include "Player.h"
+#include "Background.h"
 
 Title::Title()
 {
+
 }
 
 void Title::Start(){
 	auto bgm = resource->BGMFind("title");
 	bgm.looping(true);
 	bgm.play();
+
+
+	objects.emplace_back(std::make_shared<Background>(resource, object_info));
+	objects.emplace_back(std::make_shared<Player>(resource, object_info));
+
+	object_info.Add("background", objects.at(0));
+	object_info.Add("player", objects.at(1));
 }
 
 SceneType Title::Update(){
@@ -16,6 +26,9 @@ SceneType Title::Update(){
 	if(Application::isPushButton(Mouse::LEFT)){
 		LoadScene(SceneType::STAGE);
 		resource->BGMFind("title").stop();
+	}
+	for(auto& object : objects){
+		object->Update();
 	}
 	frame_count++;
 	if(Application::isPushButton(Mouse::RIGHT)){
@@ -25,17 +38,9 @@ SceneType Title::Update(){
 }
 
 void Title::Draw(){
-	{
-		auto window_size = Application::viewSize();
-		auto texture = resource->TextureFind("bg");
-		drawTextureBox(-window_size.x()*.5f, -window_size.y()*.5f, window_size.x(), window_size.y(),
-			0, 0, texture.width(), texture.height(), texture, Color(1, 1, 1));
-	}
 
-	{
-		auto texture = resource->AnimationFind("miku", frame_count / 30 % 6);
-		drawTextureBox(0, 0, 128, 128,
-			0, 0, 310, 270, texture, Color(1, 1, 1));
+	for (auto& object : objects){
+		object->Draw();
 	}
 
 	{

@@ -36,8 +36,12 @@ public:
 	float& SizeY(){ return size.y(); }
 	Vec2f Center()const{ return size.array() * .5f; }
 
-	void Translate(Vec2f& translate){
+	void LocalTranslate(Vec2f& translate){
 		pos = Affine(translate);
+	}
+
+	void Translate(Vec2f& translate){
+		pos += translate;
 	}
 
 	void Rotation(float rotate){
