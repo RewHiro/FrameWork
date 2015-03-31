@@ -8,7 +8,6 @@ class Object :
 {
 	const ObjectInfo& object_info;
 protected:
-
 	std::shared_ptr<Object> ObjectFind(const std::string& name)const;
 	Transform2D transform2D;
 public:
@@ -18,6 +17,7 @@ public:
 		object_info(object_info)
 	{}
 	virtual ~Object() = default;
+	virtual void Start(){}
 	virtual void Update(){}
 	virtual void Draw(){}
 

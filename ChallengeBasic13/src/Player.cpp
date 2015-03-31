@@ -10,8 +10,12 @@ Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),object_info)
 
 }
 
-void Player::Update(){
+void Player::Start(){
 	background = ObjectFind("background");
+}
+
+void Player::Update(){
+
 	std::cout << background.lock()->GetTransform2D().Position() << std::endl;
 	frame_count++;
 }

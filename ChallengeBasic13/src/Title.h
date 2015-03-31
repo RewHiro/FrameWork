@@ -1,13 +1,11 @@
 #pragma once
 #include "Scene.h"
-#include "Object.h"
-#include "ObjectInfo.h"
+#include "ObjectTask.h"
 class Title :
 	public Scene
 {
 	int frame_count = 0;
-	std::vector<std::shared_ptr<Object>>objects;
-	ObjectInfo object_info;
+	ObjectTask object_task;
 public:
 	Title();
 	void Start();
