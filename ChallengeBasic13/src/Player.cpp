@@ -5,7 +5,7 @@
 Player::Player(std::weak_ptr<Resource>resource) :
 resource(resource),
 textures(resource.lock()->AnimationFind("miku")),
-Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)))
+Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 {
 
 }

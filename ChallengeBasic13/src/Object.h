@@ -9,10 +9,12 @@ class Object :
 protected:
 	std::shared_ptr<Object> ObjectFind(const std::string& name)const;
 	Transform2D transform2D;
+	int sorting_number;
 public:
 	Object() = default;
-	Object(const Transform2D& transform2D):
-		transform2D(transform2D)
+	Object(const Transform2D& transform2D,int sorting_number = 255):
+		transform2D(transform2D),
+		sorting_number(sorting_number)
 	{}
 	virtual ~Object() = default;
 	virtual void Start(){}
@@ -22,5 +24,6 @@ public:
 	Transform2D GetTransform2D()const{ return transform2D; }
 
 	static ObjectInfo& GetObjectInfo();
+	int SortingNum()const{ return sorting_number; }
 
 };
