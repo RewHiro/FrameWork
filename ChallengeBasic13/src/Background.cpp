@@ -1,9 +1,9 @@
 #include "Background.h"
 #include "Application.h"
-Background::Background(std::weak_ptr<Resource>resource, const ObjectInfo& object_info) :
+Background::Background(std::weak_ptr<Resource>resource) :
 resource(resource),
 texture(resource.lock()->TextureFind("bg")),
-Object(Transform2D(-Application::viewSize().array()*.5f, Application::viewSize()),object_info)
+Object(Transform2D(-Application::viewSize().array()*.5f, Application::viewSize()))
 {
 }
 

@@ -11,7 +11,7 @@ class Player :
 	 const std::vector<Texture>& textures;
 	 std::weak_ptr<Object>background;
 public:
-	Player(std::weak_ptr<Resource>resource, const ObjectInfo& object_info);
+	Player(std::weak_ptr<Resource>resource);
 	void Start();
 	void Update();
 	void Draw();

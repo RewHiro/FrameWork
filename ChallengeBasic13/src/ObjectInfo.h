@@ -19,5 +19,9 @@ public:
 	std::shared_ptr<Object> Find(const std::string& name)const{
 		return object_map.find(name)->second;
 	}
+
+	void Clear(){
+		object_map.clear();
+	}
 };
 

@@ -9,7 +9,7 @@ class Background :
 	std::weak_ptr<Resource>resource;
 	Color color = Color(1, 1, 1);
 public:
-	Background(std::weak_ptr<Resource>resource, const ObjectInfo& object_info);
+	Background(std::weak_ptr<Resource>resource);
 	void Draw();
 };
 

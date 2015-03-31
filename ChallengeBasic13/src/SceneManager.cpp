@@ -8,6 +8,7 @@ SceneManager::SceneManager() :
 type(SceneType::TITLE),
 scene(Create(type))
 {
+	Object::GetObjectInfo();
 	Load();
 }
 

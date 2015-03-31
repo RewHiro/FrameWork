@@ -7,18 +7,15 @@ class ObjectTask :
 	public Uncopyable
 {
 	std::vector<std::shared_ptr<Object>>objects;
-	ObjectInfo object_info;
 public:
 	ObjectTask();
-
+	~ObjectTask();
 	void Add(const std::string& name,std::shared_ptr<Object>object){
 		objects.emplace_back(object);
-		object_info.Add(name, object);
+		Object::GetObjectInfo().Add(name, object);
 	}
 	void Start();
 	void Update();
 	void Draw();
-
-	const ObjectInfo& GetInfo()const{ return object_info; }
 };
 
