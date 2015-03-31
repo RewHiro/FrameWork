@@ -7,19 +7,17 @@ class Object :
 	private Uncopyable
 {
 	std::vector<std::shared_ptr<Component>>components;
-	ComponentTask component_task;
 protected:
-	std::shared_ptr<Object> ObjectFind(const std::string& name)const;
+	ComponentTask component_task;
+
 	Transform2D transform2D;
 	int sorting_number;
 
-	template <class Type>
-	std::shared_ptr<Type>GetComponent(const std::string& name)const{
-		return std::dynamic_pointer_cast<Type>(component_task.Find(name));
-	}
-
 	void ComponentAdd(const std::string& name,std::shared_ptr<Component>component){
 		component_task.Add(name, component);
+	}
+	void ComponetStart(){
+		component_task.Start();
 	}
 	void ComponetnUpdate(){
 		component_task.Update();
@@ -40,5 +38,17 @@ public:
 
 	static ObjectInfo& GetObjectInfo();
 	int SortingNum()const{ return sorting_number; }
+
+	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
+
+	template <class Type>
+	const std::shared_ptr<Type>GetComponent(const std::string& name)const{
+		return std::dynamic_pointer_cast<Type>(component_task.Find(name));
+	}
+
+	template <class Type>
+	const std::shared_ptr<Type>GetObjectType(const std::string& name)const{
+		return std::dynamic_pointer_cast<Type>(ObjectFind(name));
+	}
 
 };

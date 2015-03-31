@@ -12,6 +12,12 @@ class ComponentTask :
 	std::unordered_map<std::string, std::shared_ptr<Component>>component_list;
 public:
 	ComponentTask();
+
+	void Start(){
+		for (auto& component : components){
+			component->Start();
+		}
+	}
 	void Update(){
 		for(auto& component : components){
 			component->Update();

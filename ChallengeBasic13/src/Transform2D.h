@@ -1,9 +1,7 @@
 #pragma once
-#include "Component.h"
 #include "lib\vector.hpp"
 
-class Transform2D :
-	public Component
+class Transform2D 
 {
 	Vec2f pos = Vec2f::Zero();
 	Vec2f size = Vec2f::Zero();

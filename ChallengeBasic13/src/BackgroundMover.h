@@ -1,14 +1,14 @@
 #pragma once
 #include "Component.h"
 #include "Transform2D.h"
-class PlayerMover :
+
+class BackgroundMover :
 	public Component
 {
 	Transform2D& transform2D;
 public:
 	bool test = false;
-	PlayerMover(Transform2D& transform2D,ComponentTask& component_task);
-	void Start();
+	BackgroundMover(Transform2D& transform2D, ComponentTask& component_task);
 	void Update();
 };
 
