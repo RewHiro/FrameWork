@@ -5,7 +5,7 @@
 #include <memory>
 
 class ObjectInfo :
-	public Uncopyable
+	private Uncopyable
 {
 	using ObjectMap = std::unordered_multimap < std::string, std::shared_ptr<Object> > ;
 	ObjectMap object_map;

@@ -4,7 +4,7 @@
 #include "ObjectInfo.h"
 #include <vector>
 class ObjectTask :
-	public Uncopyable
+	private Uncopyable
 {
 	std::vector<std::shared_ptr<Object>>objects;
 public:

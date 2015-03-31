@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ObjectInfo.h"
+#include "PlayerMover.h"
 #include <iostream>
 
 Player::Player(std::weak_ptr<Resource>resource) :
@@ -7,16 +8,17 @@ resource(resource),
 textures(resource.lock()->AnimationFind("miku")),
 Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 {
-
+	ComponentAdd("PlayerMover", std::make_shared<PlayerMover>(transform2D));
 }
 
 void Player::Start(){
 	background = ObjectFind("background");
+	GetComponent<PlayerMover>("PlayerMover")->test = true;
 }
 
 void Player::Update(){
-
-	std::cout << background.lock()->GetTransform2D().Position() << std::endl;
+	ComponetnUpdate();
+	std::cout << background.lock()->GetTransform2D().PosX() << std::endl;
 	frame_count++;
 }
 
