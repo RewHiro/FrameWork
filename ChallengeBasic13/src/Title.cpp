@@ -14,8 +14,8 @@ void Title::Start(){
 	bgm.looping(true);
 	bgm.play();
 
-	object_task.Add("player", std::make_shared<Player>(resource));
-	object_task.Add("background", std::make_shared<Background>(resource));
+	object_task.Add("Player",std::make_shared<Player>(resource));
+	object_task.Add("Background",std::make_shared<Background>(resource));
 
 	object_task.Start();
 

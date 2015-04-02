@@ -1,36 +1,23 @@
 #pragma once
 #include "Uncopyable.h"
-#include "Component.h"
 #include <vector>
 #include <unordered_map>
 #include <memory>
 
-class ComponentTask :
-	private Uncopyable
+class Component;
+
+class ComponentTask : private Uncopyable
 {
 	std::vector<std::shared_ptr<Component>>components;
 	std::unordered_map<std::string, std::shared_ptr<Component>>component_list;
 public:
 	ComponentTask();
 
-	void Start(){
-		for (auto& component : components){
-			component->Start();
-		}
-	}
-	void Update(){
-		for(auto& component : components){
-			component->Update();
-		}
-	}
+	void Start();
+	void Update();
 
-	void Add(const std::string& name,std::shared_ptr<Component>component){
-		components.emplace_back(component);
-		component_list.emplace(name, component);
-	}
+	void Add(std::shared_ptr<Component>component);
 
-	std::shared_ptr<Component> Find(const std::string& name)const{
-		return component_list.find(name)->second;
-	}
+	const std::shared_ptr<Component> Find(const std::string& name)const;
 };
 

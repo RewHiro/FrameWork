@@ -9,14 +9,14 @@ resource(resource),
 textures(resource.lock()->AnimationFind("miku")),
 Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 {
-	ComponentAdd("PlayerMover", std::make_shared<PlayerMover>(transform2D,component_task));
-	ComponentAdd("PlayerTest", std::make_shared<PlayerTest>(component_task));
+	ComponentAdd(std::make_shared<PlayerMover>(transform2D,component_task));
+	ComponentAdd(std::make_shared<PlayerTest>(component_task));
 }
 
 void Player::Start(){
 	ComponetStart();
-	background = ObjectFind("background");
-	GetComponent<PlayerMover>("PlayerMover")->test = true;
+	background = ObjectFind("Background");
+	GetComponent<PlayerMover>()->test = true;
 }
 
 void Player::Update(){

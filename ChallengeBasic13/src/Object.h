@@ -2,6 +2,7 @@
 #include "Uncopyable.h"
 #include "Transform2D.h"
 #include "ComponentTask.h"
+#include  <typeinfo>
 class ObjectInfo;
 class Object :
 	private Uncopyable
@@ -13,8 +14,8 @@ protected:
 	Transform2D transform2D;
 	int sorting_number;
 
-	void ComponentAdd(const std::string& name,std::shared_ptr<Component>component){
-		component_task.Add(name, component);
+	void ComponentAdd(std::shared_ptr<Component>component){
+		component_task.Add(component);
 	}
 	void ComponetStart(){
 		component_task.Start();
@@ -42,13 +43,25 @@ public:
 	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
 
 	template <class Type>
-	const std::shared_ptr<Type>GetComponent(const std::string& name)const{
-		return std::dynamic_pointer_cast<Type>(component_task.Find(name));
+	const std::shared_ptr<Type>GetComponent()const{
+		std::string name = typeid(Type).name();
+		return std::dynamic_pointer_cast<Type>(component_task.Find(name.substr(6)));
 	}
 
 	template <class Type>
-	const std::shared_ptr<Type>GetObjectType(const std::string& name)const{
-		return std::dynamic_pointer_cast<Type>(ObjectFind(name));
+	const std::shared_ptr<Type>GetObjectType()const{
+		std::string name = typeid(Type).name();
+		return std::dynamic_pointer_cast<Type>(ObjectFind(name.substr(6)));
+	}
+
+	const ComponentTask& GetComponentTask()const{
+		return component_task;
+	}
+
+	virtual std::string Name()const{
+		const std::type_info& id = typeid(*this);
+		std::string name = id.name();
+		return name.substr(6);
 	}
 
 };
