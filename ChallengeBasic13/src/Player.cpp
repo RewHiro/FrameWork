@@ -4,9 +4,8 @@
 #include "PlayerTest.h"
 #include <iostream>
 
-Player::Player(std::weak_ptr<Resource>resource) :
-resource(resource),
-textures(resource.lock()->AnimationFind("miku")),
+Player::Player() :
+textures(GetResource()->AnimationFind("miku")),
 Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 {
 

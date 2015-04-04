@@ -10,9 +10,14 @@ class SceneManager
 	std::unique_ptr<Scene> Create(const SceneType type);
 
 	SceneManager();
+	std::shared_ptr<Resource>resource;
 public:
 	static SceneManager& GetInstance();
 	void Update();
+
+	const std::shared_ptr<Resource> GetResource()const{
+		return resource;
+	}
 private:
 	void Load();
 };

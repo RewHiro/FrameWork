@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include "Title.h"
 #include "Stage.h"
+#include "ResourceFactory.h"
 #include <unordered_map>
 #include <functional>
 
@@ -42,6 +43,8 @@ std::unique_ptr<Scene> SceneManager::Create(const SceneType type){
 }
 
 void SceneManager::Load(){
+	ResourceFactory factory;
+	resource = factory.Create(type);
 	scene->Load(type);
 	scene->Start();
 }

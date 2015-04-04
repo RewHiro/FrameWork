@@ -1,5 +1,4 @@
 #pragma once
-#include "Transform2D.h"
 #include "Object.h"
 #include "Uncopyable.h"
 #include<string>

@@ -1,9 +1,8 @@
 #include "Background.h"
 #include "Application.h"
 #include "BackgroundMover.h"
-Background::Background(std::weak_ptr<Resource>resource) :
-resource(resource),
-texture(resource.lock()->TextureFind("bg")),
+Background::Background() :
+texture(GetResource()->TextureFind("bg")),
 Object(Transform2D(-Application::viewSize().array()*.5f, Application::viewSize()))
 {
 }

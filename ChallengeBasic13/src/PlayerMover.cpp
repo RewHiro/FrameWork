@@ -19,7 +19,7 @@ void PlayerMover::Start(){
 }
 
 void PlayerMover::Update(){
-	std::cout << ObjectFind("Background")->GetTransform2D().Position() << std::endl;
+	std::cout << ObjectFind("Background")->transform2D.Position() << std::endl;
 
 	if(Application::isPressKey('W')){
 		object.lock()->transform2D.PosY() += 10;

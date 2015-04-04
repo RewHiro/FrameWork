@@ -1,9 +1,11 @@
 #pragma once
 #include "Uncopyable.h"
-#include "Transform2D.h"
 #include "ComponentTask.h"
 #include "ComponentInfo.h"
+#include "Transform2D.h"
+#include "Resource.h"
 #include  <typeinfo>
+
 class ObjectInfo;
 class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 {
@@ -21,6 +23,8 @@ protected:
 		component_task.Update();
 	}
 
+	static const std::shared_ptr<Resource> GetResource();
+
 public:
 	Transform2D transform2D;
 	Object() = default;
@@ -33,8 +37,6 @@ public:
 	virtual void Start(){}
 	virtual void Update(){}
 	virtual void Draw(){}
-
-	Transform2D& GetTransform2D(){ return transform2D; }
 
 	static ObjectInfo& GetObjectInfo();
 	int SortingNum()const{ return sorting_number; }
@@ -62,5 +64,4 @@ public:
 		std::string name = id.name();
 		return name.substr(6);
 	}
-
 };
