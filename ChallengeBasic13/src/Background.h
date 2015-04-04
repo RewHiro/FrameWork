@@ -10,6 +10,7 @@ class Background :
 	Color color = Color(1, 1, 1);
 public:
 	Background(std::weak_ptr<Resource>resource);
+	void Awake();
 	void Update();
 	void Start();
 	void Draw();

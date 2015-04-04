@@ -12,6 +12,7 @@ class Player :
 	 std::weak_ptr<Object>background;
 public:
 	Player(std::weak_ptr<Resource>resource);
+	void Awake();
 	void Start();
 	void Update();
 	void Draw();

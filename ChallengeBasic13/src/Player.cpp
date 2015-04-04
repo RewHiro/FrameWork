@@ -9,8 +9,13 @@ resource(resource),
 textures(resource.lock()->AnimationFind("miku")),
 Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 {
-	ComponentAdd(std::make_shared<PlayerMover>(transform2D,component_task));
-	ComponentAdd(std::make_shared<PlayerTest>(component_task));
+
+}
+
+void Player::Awake(){
+	ComponentAdd(std::make_shared<PlayerMover>());
+	ComponentAdd(std::make_shared<PlayerTest>());
+
 }
 
 void Player::Start(){

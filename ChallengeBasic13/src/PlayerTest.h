@@ -5,6 +5,6 @@ class PlayerTest :
 {
 public:
 	bool test = true;
-	PlayerTest(ComponentTask& component_task);
+	PlayerTest();
 };
 

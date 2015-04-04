@@ -2,21 +2,18 @@
 #include "Uncopyable.h"
 #include "Transform2D.h"
 #include "ComponentTask.h"
+#include "ComponentInfo.h"
 #include  <typeinfo>
 class ObjectInfo;
-class Object :
-	private Uncopyable
+class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 {
-	std::vector<std::shared_ptr<Component>>components;
 protected:
 	ComponentTask component_task;
+	ComponentInfo component_info;
 
-	Transform2D transform2D;
 	int sorting_number;
 
-	void ComponentAdd(std::shared_ptr<Component>component){
-		component_task.Add(component);
-	}
+	void ComponentAdd(std::shared_ptr<Component>component);
 	void ComponetStart(){
 		component_task.Start();
 	}
@@ -25,17 +22,19 @@ protected:
 	}
 
 public:
+	Transform2D transform2D;
 	Object() = default;
 	Object(const Transform2D& transform2D,int sorting_number = 255):
 		transform2D(transform2D),
 		sorting_number(sorting_number)
 	{}
 	virtual ~Object() = default;
+	virtual void Awake(){}
 	virtual void Start(){}
 	virtual void Update(){}
 	virtual void Draw(){}
 
-	Transform2D GetTransform2D()const{ return transform2D; }
+	Transform2D& GetTransform2D(){ return transform2D; }
 
 	static ObjectInfo& GetObjectInfo();
 	int SortingNum()const{ return sorting_number; }
@@ -45,7 +44,7 @@ public:
 	template <class Type>
 	const std::shared_ptr<Type>GetComponent()const{
 		std::string name = typeid(Type).name();
-		return std::dynamic_pointer_cast<Type>(component_task.Find(name.substr(6)));
+		return std::dynamic_pointer_cast<Type>(component_info.Find(name.substr(6)));
 	}
 
 	template <class Type>
@@ -54,8 +53,8 @@ public:
 		return std::dynamic_pointer_cast<Type>(ObjectFind(name.substr(6)));
 	}
 
-	const ComponentTask& GetComponentTask()const{
-		return component_task;
+	const ComponentInfo& GetComponentInfo()const{
+		return component_info;
 	}
 
 	virtual std::string Name()const{

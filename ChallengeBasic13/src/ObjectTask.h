@@ -14,6 +14,7 @@ public:
 		objects.emplace_back(object);
 		Object::GetObjectInfo().Add(name, object);
 	}
+	void Awake();
 	void Start();
 	void Update();
 	void Draw();

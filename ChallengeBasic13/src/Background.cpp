@@ -6,7 +6,10 @@ resource(resource),
 texture(resource.lock()->TextureFind("bg")),
 Object(Transform2D(-Application::viewSize().array()*.5f, Application::viewSize()))
 {
-	ComponentAdd(std::make_shared<BackgroundMover>(transform2D, component_task));
+}
+
+void Background::Awake(){
+	ComponentAdd(std::make_shared<BackgroundMover>());
 }
 
 void Background::Start(){

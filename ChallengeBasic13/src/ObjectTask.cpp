@@ -10,6 +10,12 @@ ObjectTask::~ObjectTask()
 	Object::GetObjectInfo().Clear();
 }
 
+void ObjectTask::Awake(){
+	for (auto& object : objects){
+		object->Awake();
+	}
+}
+
 void ObjectTask::Start(){
 	for (auto& object : objects){
 		object->Start();

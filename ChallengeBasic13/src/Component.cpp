@@ -1,9 +1,7 @@
 #include "Component.h"
-#include "Object.h"
 #include "ObjectInfo.h"
 
-Component::Component(ComponentTask& component_task):
-component_task(component_task)
+Component::Component()
 {
 }
 

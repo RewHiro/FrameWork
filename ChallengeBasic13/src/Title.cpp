@@ -17,6 +17,8 @@ void Title::Start(){
 	object_task.Add("Player",std::make_shared<Player>(resource));
 	object_task.Add("Background",std::make_shared<Background>(resource));
 
+	object_task.Awake();
+
 	object_task.Start();
 
 }

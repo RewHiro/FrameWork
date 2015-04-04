@@ -4,10 +4,9 @@
 class PlayerMover :
 	public Component
 {
-	Transform2D& transform2D;
 public:
 	bool test = false;
-	PlayerMover(Transform2D& transform2D,ComponentTask& component_task);
+	PlayerMover();
 	void Start();
 	void Update();
 };

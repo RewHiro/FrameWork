@@ -7,7 +7,6 @@
 
 
 //TODO
-//クラス名取得
 //当たり判定->Utility
 //Erase機能(objectやcomponetnを削除する機能)
 //resouceが引数に入っててめんどいのをどうにかする

@@ -18,9 +18,4 @@ void ComponentTask::Update(){
 
 void ComponentTask::Add(std::shared_ptr<Component>component){
 	components.emplace_back(component);
-	component_list.emplace(component->Name(), component);
-}
-
-const std::shared_ptr<Component> ComponentTask::Find(const std::string& name)const{
-	return component_list.find(name)->second;
 }

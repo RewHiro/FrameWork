@@ -6,11 +6,8 @@
 #include "PlayerTest.h"
 #include <iostream>
 
-PlayerMover::PlayerMover(Transform2D& transform2D, ComponentTask& component_task) :
-transform2D(transform2D),
-Component(component_task)
+PlayerMover::PlayerMover()
 {
-
 }
 
 void PlayerMover::Start(){
@@ -25,6 +22,6 @@ void PlayerMover::Update(){
 	std::cout << ObjectFind("Background")->GetTransform2D().Position() << std::endl;
 
 	if(Application::isPressKey('W')){
-		transform2D.PosY() += 10;
+		object.lock()->transform2D.PosY() += 10;
 	}
 }
