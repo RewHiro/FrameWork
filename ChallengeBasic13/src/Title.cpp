@@ -32,6 +32,7 @@ SceneType Title::Update(){
 	if(Application::isPushButton(Mouse::RIGHT)){
 		resource->SEFind("hit").play();
 	}
+	Object::GetObjectTask().Erase();
 	return Type();
 }
 

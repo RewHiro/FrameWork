@@ -19,8 +19,8 @@ SceneManager& SceneManager::GetInstance(){
 }
 
 void SceneManager::Update(){
-	auto now_type = scene->Update();
 	scene->Draw();
+	auto now_type = scene->Update();
 
 	if (type == now_type)return;
 	scene = Create(now_type);

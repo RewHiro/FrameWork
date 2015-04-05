@@ -2,11 +2,11 @@
 #include "Uncopyable.h"
 #include "Object.h"
 #include "ObjectInfo.h"
-#include <vector>
+#include <forward_list>
 class ObjectTask :
 	private Uncopyable
 {
-	std::vector<std::shared_ptr<Object>>objects;
+	std::forward_list<std::shared_ptr<Object>>objects;
 public:
 	ObjectTask();
 	~ObjectTask();
@@ -16,5 +16,6 @@ public:
 	void Update();
 	void Draw();
 	void Clear();
+	void Erase();
 };
 

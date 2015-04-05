@@ -8,6 +8,9 @@
 Scene::~Scene(){
 	Object::GetObjectTask().Clear();
 	Object::GetObjectInfo().Clear();
+	while(!Object::GetDeleteList().empty()){
+		Object::GetDeleteList().pop();
+	}
 }
 
 void Scene::Load(const SceneType type){

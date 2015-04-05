@@ -5,11 +5,13 @@
 #include "Transform2D.h"
 #include "Resource.h"
 #include  <typeinfo>
+#include <stack>
 
 class ObjectTask;
 class ObjectInfo;
 class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 {
+	bool is_delete = false;
 protected:
 	ComponentTask component_task;
 	ComponentInfo component_info;
@@ -42,6 +44,8 @@ public:
 	static ObjectInfo& GetObjectInfo();
 	static ObjectTask& GetObjectTask();
 
+	std::string name;
+
 	int SortingNum()const{ return sorting_number; }
 
 	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
@@ -62,11 +66,8 @@ public:
 		return component_info;
 	}
 
-	virtual std::string Name()const{
-		const std::type_info& id = typeid(*this);
-		std::string name = id.name();
-		return name.substr(6);
-	}
-
 	static void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
+	void Destory(std::shared_ptr<Object>object);
+	bool IsDelete()const{ return is_delete; }
+	static std::stack<std::shared_ptr<Object>>& GetDeleteList();
 };

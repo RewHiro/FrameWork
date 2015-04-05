@@ -2,6 +2,7 @@
 #include "ObjectInfo.h"
 #include "PlayerMover.h"
 #include "PlayerTest.h"
+#include "Application.h"
 #include <iostream>
 
 Player::Player() :
@@ -33,6 +34,9 @@ void Player::Update(){
 	ComponetnUpdate();
 	//std::cout << background.lock()->GetTransform2D().PosX() << std::endl;
 	frame_count++;
+	if(Application::isPushKey('E')){
+		Destory(shared_from_this());
+	}
 }
 
 void Player::Draw(){
