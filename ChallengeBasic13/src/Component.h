@@ -22,6 +22,8 @@ protected:
 		return std::dynamic_pointer_cast<Type>(ObjectFind(name.substr(6)));
 	}
 
+	void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
+
 public:
 	Component();
 	virtual ~Component() = default;

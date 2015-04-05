@@ -13,13 +13,11 @@ void Title::Start(){
 	auto bgm = resource->BGMFind("title");
 	bgm.looping(true);
 	bgm.play();
+	Object::ObjectAdd("Player", std::make_shared<Player>());
+	Object::ObjectAdd("Background", std::make_shared<Background>());
 
-	object_task.Add("Player",std::make_shared<Player>());
-	object_task.Add("Background",std::make_shared<Background>());
-
-	object_task.Awake();
-
-	object_task.Start();
+	Object::GetObjectTask().Awake();
+	Object::GetObjectTask().Start();
 
 }
 
@@ -29,7 +27,7 @@ SceneType Title::Update(){
 		LoadScene(SceneType::STAGE);
 		resource->BGMFind("title").stop();
 	}
-	object_task.Update();
+	Object::GetObjectTask().Update();
 	frame_count++;
 	if(Application::isPushButton(Mouse::RIGHT)){
 		resource->SEFind("hit").play();
@@ -39,7 +37,7 @@ SceneType Title::Update(){
 
 void Title::Draw(){
 
-	object_task.Draw();
+	Object::GetObjectTask().Draw();
 
 	{
 	auto pos = Application::mousePositon();

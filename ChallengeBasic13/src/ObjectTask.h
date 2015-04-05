@@ -10,13 +10,11 @@ class ObjectTask :
 public:
 	ObjectTask();
 	~ObjectTask();
-	void Add(const std::string& name,std::shared_ptr<Object>object){
-		objects.emplace_back(object);
-		Object::GetObjectInfo().Add(name, object);
-	}
+	void Add(const std::string& name, std::shared_ptr<Object>object);
 	void Awake();
 	void Start();
 	void Update();
 	void Draw();
+	void Clear();
 };
 

@@ -7,7 +7,13 @@ ObjectTask::ObjectTask()
 
 ObjectTask::~ObjectTask()
 {
-	Object::GetObjectInfo().Clear();
+}
+
+void ObjectTask::Add(const std::string& name, std::shared_ptr<Object>object){
+	objects.emplace_back(object);
+	std::stable_sort(objects.begin(), objects.end(), [](std::weak_ptr<Object> a, std::weak_ptr<Object> b){
+		return a.lock()->SortingNum() > b.lock()->SortingNum();
+	});
 }
 
 void ObjectTask::Awake(){
@@ -20,9 +26,7 @@ void ObjectTask::Start(){
 	for (auto& object : objects){
 		object->Start();
 	}
-	std::stable_sort(objects.begin(), objects.end(), [](std::weak_ptr<Object> a, std::weak_ptr<Object> b){
-		return a.lock()->SortingNum() > b.lock()->SortingNum(); 
-	});
+
 }
 
 void ObjectTask::Update(){
@@ -35,4 +39,8 @@ void ObjectTask::Draw(){
 	for (auto& object : objects){
 		object->Draw();
 	}
+}
+
+void ObjectTask::Clear(){
+	objects.clear();
 }

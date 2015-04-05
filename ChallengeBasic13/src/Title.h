@@ -5,7 +5,6 @@ class Title :
 	public Scene
 {
 	int frame_count = 0;
-	ObjectTask object_task;
 public:
 	Title();
 	void Start();

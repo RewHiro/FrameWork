@@ -10,6 +10,7 @@ class Player :
 	 std::weak_ptr<Object>background;
 public:
 	Player();
+	Player(Transform2D& transform2D);
 	void Awake();
 	void Start();
 	void Update();

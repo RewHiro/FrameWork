@@ -16,7 +16,7 @@ protected:
 	std::shared_ptr<Resource>resource;
 public:
 	Scene() = default;
-	virtual ~Scene() = default;
+	virtual ~Scene();
 
 	virtual void Start(){ return; }
 	virtual SceneType Update() = 0;

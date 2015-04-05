@@ -6,6 +6,7 @@
 #include "Resource.h"
 #include  <typeinfo>
 
+class ObjectTask;
 class ObjectInfo;
 class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 {
@@ -39,6 +40,8 @@ public:
 	virtual void Draw(){}
 
 	static ObjectInfo& GetObjectInfo();
+	static ObjectTask& GetObjectTask();
+
 	int SortingNum()const{ return sorting_number; }
 
 	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
@@ -64,4 +67,6 @@ public:
 		std::string name = id.name();
 		return name.substr(6);
 	}
+
+	static void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
 };

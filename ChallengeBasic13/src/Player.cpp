@@ -11,10 +11,16 @@ Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 
 }
 
+Player::Player(Transform2D& transform2D) :
+textures(GetResource()->AnimationFind("miku")),
+Object(transform2D, 1)
+{
+
+}
+
 void Player::Awake(){
 	ComponentAdd(std::make_shared<PlayerMover>());
 	ComponentAdd(std::make_shared<PlayerTest>());
-
 }
 
 void Player::Start(){
