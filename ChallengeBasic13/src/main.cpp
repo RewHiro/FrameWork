@@ -8,13 +8,31 @@
 
 //TODO
 //当たり判定->Utility
-//Erase機能(objectやcomponetnを削除する機能)
 //パーティクル機能
 //最後にコメントを書く
+//整理
+//親子の関係
+//テキストの読み込み(json)
+
+//当たり判定一覧
+//点と点
+//点と線
+//点と四角
+//点と円
+//円と円
+//四角と四角
+
+//Utility一覧
+//2点間の距離
+//なす角
+//clamp
 
 // 
 // メインプログラム
 // 
-int main() {
+int main(){
+	//　メモリーリークの確認
+	//　メモリーリークしていたらデバッグ出力に表示される
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	Application::GetInstance().Update();
 }

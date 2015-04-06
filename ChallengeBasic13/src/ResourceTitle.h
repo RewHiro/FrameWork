@@ -5,6 +5,7 @@ class ResourceTitle :
 	public Resource
 {
 public:
+
 	ResourceTitle();
 };
 

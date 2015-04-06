@@ -4,8 +4,6 @@
 class Player :
 	public Object
 {
-	 int frame_count = 0;
-	 Color color = Color(1, 1, 1);
 	 const std::vector<Texture>& textures;
 	 std::weak_ptr<Object>background;
 public:

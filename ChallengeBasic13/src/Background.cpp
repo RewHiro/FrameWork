@@ -1,6 +1,7 @@
 #include "Background.h"
 #include "Application.h"
 #include "BackgroundMover.h"
+#include "Resource.h"
 Background::Background() :
 texture(GetResource()->TextureFind("bg")),
 Object(Transform2D(-Application::viewSize().array()*.5f, Application::viewSize()))

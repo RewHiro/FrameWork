@@ -3,6 +3,11 @@
 #include "Uncopyable.h"
 #include "SceneManager.h"
 
+
+//
+//　主にインプットの機能(マウスやキーの入力など)
+//　シングルトーン
+//
 class Application : private Uncopyable
 {
 	static AppEnv& Env();

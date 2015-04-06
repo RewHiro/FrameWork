@@ -4,11 +4,11 @@
 #include "Scene.h"
 #include <memory>
 
-class ResourceFactory :
-	private Uncopyable
+class ResourceFactory : private Uncopyable
 {
-public:
 	ResourceFactory() = default;
+public:
+	static ResourceFactory& GetInstance();
 	std::shared_ptr<Resource> Create(const SceneType type);
 };
 

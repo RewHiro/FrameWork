@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <functional>
 
+
 std::shared_ptr<Resource> ResourceFactory::Create(const SceneType type){
 	static const std::unordered_map<SceneType, std::function<std::shared_ptr<Resource>()>> resource_list = {
 		{
@@ -16,4 +17,9 @@ std::shared_ptr<Resource> ResourceFactory::Create(const SceneType type){
 		}
 	};
 	return (resource_list.find(type))->second();
+}
+
+ResourceFactory& ResourceFactory::GetInstance(){
+	static ResourceFactory factory;
+	return factory;
 }

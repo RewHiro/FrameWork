@@ -2,14 +2,11 @@
 #include "Application.h"
 #include "Player.h"
 #include "Background.h"
+#include "ObjectTask.h"
+#include "Resource.h"
 
 Title::Title()
 {
-
-}
-
-//　リソース取得の場合
-void Title::Start(){
 	auto bgm = resource->BGMFind("title");
 	bgm.looping(true);
 	bgm.play();
@@ -18,7 +15,6 @@ void Title::Start(){
 
 	Object::GetObjectTask().Awake();
 	Object::GetObjectTask().Start();
-
 }
 
 SceneType Title::Update(){
@@ -27,11 +23,11 @@ SceneType Title::Update(){
 		LoadScene(SceneType::STAGE);
 		resource->BGMFind("title").stop();
 	}
-	Object::GetObjectTask().Update();
 	frame_count++;
 	if(Application::isPushButton(Mouse::RIGHT)){
 		resource->SEFind("hit").play();
 	}
+	Object::GetObjectTask().Update();
 	Object::GetObjectTask().Erase();
 	return Type();
 }

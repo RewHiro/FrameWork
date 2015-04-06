@@ -2,17 +2,18 @@
 #include "ResourceFactory.h"
 #include "SceneManager.h"
 #include "Object.h"
-#include "ObjectTask.h"
-#include "ObjectInfo.h"
 
-Scene::~Scene(){
-	Object::GetObjectTask().Clear();
-	Object::GetObjectInfo().Clear();
-	while(!Object::GetDeleteList().empty()){
-		Object::GetDeleteList().pop();
-	}
+Scene::Scene():
+type(SceneManager::GetInstance().GetType()),
+resource(SceneManager::GetInstance().GetResource())
+{
 }
 
+Scene::~Scene(){
+}
+
+//　現在のシーンの切り替え
+//　リソースの切り替え
 void Scene::Load(const SceneType type){
 	this->type = type;
 	resource = SceneManager::GetInstance().GetResource();

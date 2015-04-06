@@ -3,13 +3,13 @@
 #include "PlayerMover.h"
 #include "PlayerTest.h"
 #include "Application.h"
+#include "Resource.h"
 #include <iostream>
 
 Player::Player() :
 textures(GetResource()->AnimationFind("miku")),
 Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
 {
-
 }
 
 Player::Player(Transform2D& transform2D) :

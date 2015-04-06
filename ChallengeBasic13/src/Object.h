@@ -3,53 +3,74 @@
 #include "ComponentTask.h"
 #include "ComponentInfo.h"
 #include "Transform2D.h"
-#include "Resource.h"
+#include "lib\graph.hpp"
 #include  <typeinfo>
 #include <stack>
 
+class Transform2D;
+class Resource;
 class ObjectTask;
 class ObjectInfo;
+class Object;
+
+using OBJECT_MAP_ITR = std::unordered_multimap<std::string, std::shared_ptr<Object>>::iterator;
+
+//　オブジェクト(抽象クラス)
 class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 {
 	bool is_delete = false;
 protected:
 	ComponentTask component_task;
 	ComponentInfo component_info;
-
 	int sorting_number;
+	int frame_count = 0;
+	Color color = Color(1, 1, 1);
 
+	//　コンポーネント追加
 	void ComponentAdd(std::shared_ptr<Component>component);
-	void ComponetStart(){
-		component_task.Start();
-	}
-	void ComponetnUpdate(){
-		component_task.Update();
-	}
 
+	//　更新
+	void ComponetStart();
+	void ComponetnUpdate();
+
+	//　リソースの取得
 	static const std::shared_ptr<Resource> GetResource();
 
 public:
 	Transform2D transform2D;
+	Transform2D parent_transform2D;
+	std::string name;
+
 	Object() = default;
 	Object(const Transform2D& transform2D,int sorting_number = 255):
 		transform2D(transform2D),
 		sorting_number(sorting_number)
 	{}
+
 	virtual ~Object() = default;
+
 	virtual void Awake(){}
 	virtual void Start(){}
 	virtual void Update(){}
 	virtual void Draw(){}
 
+	//　使用禁止
 	static ObjectInfo& GetObjectInfo();
+	//　使用禁止
 	static ObjectTask& GetObjectTask();
 
-	std::string name;
-
+	//　描画優先順位取得
 	int SortingNum()const{ return sorting_number; }
 
-	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
+	//　削除するか
+	bool IsDelete()const{ return is_delete; }
 
+	//　オブジェクト取得
+	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
+	//　オブジェクト取得(複数)
+	const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR> ObjectFinds(const std::string& name);
+
+	//　コンポーネント取得
 	template <class Type>
 	const std::shared_ptr<Type>GetComponent()const{
 		std::string name = typeid(Type).name();
@@ -62,12 +83,17 @@ public:
 		return std::dynamic_pointer_cast<Type>(ObjectFind(name.substr(6)));
 	}
 
+	//　使用禁止
 	const ComponentInfo& GetComponentInfo()const{
 		return component_info;
 	}
-
+	
+	//　オブジェクトの追加
 	static void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
+
+	//　オブジェクトの破壊
 	void Destory(std::shared_ptr<Object>object);
-	bool IsDelete()const{ return is_delete; }
+
+	//　使用禁止
 	static std::stack<std::shared_ptr<Object>>& GetDeleteList();
 };

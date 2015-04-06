@@ -5,10 +5,12 @@
 #include <memory>
 class Component : private Uncopyable
 {
+	using OBJECT_MAP_ITR = std::unordered_multimap<std::string, std::shared_ptr<Object>>::iterator;
 protected:
 	std::weak_ptr<Object>object;
 	bool is_active = true;
 	const std::shared_ptr<Object> ObjectFind(const std::string& name);
+	const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR>& ObjectFinds(const std::string& name);
 
 	template <class Type>
 	const std::shared_ptr<Type>GetComponent()const{
