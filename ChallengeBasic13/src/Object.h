@@ -15,10 +15,19 @@ class Object;
 
 using OBJECT_MAP_ITR = std::unordered_multimap<std::string, std::shared_ptr<Object>>::iterator;
 
+//　更新の種類
+enum class UpdateState{
+	AWAKE,
+	START,
+	UPDATE,
+};
+
 //　オブジェクト(抽象クラス)
 class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 {
 	bool is_delete = false;
+	bool is_active = true;
+	UpdateState update_state = UpdateState::START;
 protected:
 	ComponentTask component_task;
 	ComponentInfo component_info;
@@ -49,7 +58,6 @@ public:
 
 	virtual ~Object() = default;
 
-	virtual void Awake(){}
 	virtual void Start(){}
 	virtual void Update(){}
 	virtual void Draw(){}
@@ -64,6 +72,9 @@ public:
 
 	//　削除するか
 	bool IsDelete()const{ return is_delete; }
+
+	//　更新状態を取得
+	UpdateState& GetUpdateState(){ return update_state; }
 
 	//　オブジェクト取得
 	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
@@ -93,7 +104,4 @@ public:
 
 	//　オブジェクトの破壊
 	void Destory(std::shared_ptr<Object>object);
-
-	//　使用禁止
-	static std::stack<std::shared_ptr<Object>>& GetDeleteList();
 };

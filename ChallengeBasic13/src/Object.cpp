@@ -8,7 +8,6 @@
 void Object::ComponentAdd(std::shared_ptr<Component>component){
 	component_task.Add(component);
 	component_info.Add(component);
-	component->SetObject(shared_from_this());
 }
 
 //　コンポーネント更新
@@ -53,12 +52,6 @@ void Object::ObjectAdd(const std::string& name, std::shared_ptr<Object>object){
 //　オブジェクト破壊
 void Object::Destory(std::shared_ptr<Object>object){
 	is_delete = !is_delete;
-	GetDeleteList().emplace(object);
-}
-
-//　オブジェクト破壊リスト取得
-std::stack<std::shared_ptr<Object>>& Object::GetDeleteList(){
-	static std::stack<std::shared_ptr<Object>>delete_list;
-	return delete_list;
+	GetObjectTask().GetDeleteList().emplace(object);
 }
 

@@ -7,7 +7,7 @@ class BackgroundMover :
 {
 public:
 	bool test = false;
-	BackgroundMover();
+	BackgroundMover(Object& object);
 	void Update();
 };
 

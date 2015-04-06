@@ -9,7 +9,6 @@ class Player :
 public:
 	Player();
 	Player(Transform2D& transform2D);
-	void Awake();
 	void Start();
 	void Update();
 	void Draw();

@@ -12,25 +12,19 @@ void ObjectTask::Add(const std::string& name, std::shared_ptr<Object>object){
 	objects.sort([](std::weak_ptr<Object> a, std::weak_ptr<Object> b){return a.lock()->SortingNum() > b.lock()->SortingNum(); });
 }
 
-//　Start関数が実行する前に実行される
-void ObjectTask::Awake(){
-	for (auto& object : objects){
-		object->Awake();
-	}
-}
-
-//　Update関数が実行する前に実行される
-void ObjectTask::Start(){
-	for (auto& object : objects){
-		object->Start();
-	}
-
-}
-
 //　更新
 void ObjectTask::Update(){
 	for(auto& object : objects){
-		object->Update();
+		switch (object->GetUpdateState())
+		{
+		case UpdateState::UPDATE:
+			object->Update();
+			break;
+		case UpdateState::START:
+			object->Start();
+			object->GetUpdateState() = UpdateState::UPDATE;
+			break;
+		}
 	}
 }
 
@@ -48,14 +42,14 @@ void ObjectTask::Clear(){
 
 //　削除
 void ObjectTask::Erase(){
-	while(!Object::GetDeleteList().empty()){
-		auto object = Object::GetDeleteList().top();
+	while(!GetDeleteList().empty()){
+		auto object = GetDeleteList().top();
 		if(object == nullptr){
-			Object::GetDeleteList().pop();
+			GetDeleteList().pop();
 			continue;
 		}
 		objects.remove(object);
 		Object::GetObjectInfo().Erase(object);
-		Object::GetDeleteList().pop();
+		GetDeleteList().pop();
 	}
 }

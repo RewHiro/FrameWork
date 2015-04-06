@@ -8,7 +8,6 @@ class Background :
 	Color color = Color(1, 1, 1);
 public:
 	Background();
-	void Awake();
 	void Update();
 	void Start();
 	void Draw();

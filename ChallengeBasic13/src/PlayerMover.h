@@ -6,7 +6,7 @@ class PlayerMover :
 {
 public:
 	bool test = false;
-	PlayerMover();
+	PlayerMover(Object& object);
 	void Start();
 	void Update();
 };

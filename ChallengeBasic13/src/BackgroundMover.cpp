@@ -2,12 +2,13 @@
 #include "ComponentTask.h"
 #include "Application.h"
 
-BackgroundMover::BackgroundMover()
+BackgroundMover::BackgroundMover(Object& object):
+Component(object)
 {
 }
 
 void BackgroundMover::Update(){
 	if(Application::isPressKey('A')){
-		object.lock()->transform2D.PosX() += -10;
+		object.transform2D.PosX() += -10;
 	}
 }

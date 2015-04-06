@@ -12,13 +12,9 @@ Title::Title()
 	bgm.play();
 	Object::ObjectAdd("Player", std::make_shared<Player>());
 	Object::ObjectAdd("Background", std::make_shared<Background>());
-
-	Object::GetObjectTask().Awake();
-	Object::GetObjectTask().Start();
 }
 
 SceneType Title::Update(){
-
 	if(Application::isPushButton(Mouse::LEFT)){
 		LoadScene(SceneType::STAGE);
 		resource->BGMFind("title").stop();

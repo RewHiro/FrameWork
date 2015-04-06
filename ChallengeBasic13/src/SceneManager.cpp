@@ -16,15 +16,15 @@ scene(Create(type))
 
 //@XV
 void SceneManager::Update(){
-	scene->Draw();
 	auto now_type = scene->Update();
+	scene->Draw();
 
 	if (type == now_type)return;
 	type = now_type;
 	Object::GetObjectTask().Clear();
 	Object::GetObjectInfo().Clear();
-	while (!Object::GetDeleteList().empty()){
-		Object::GetDeleteList().pop();
+	while (!Object::GetObjectTask().GetDeleteList().empty()){
+		Object::GetObjectTask().GetDeleteList().pop();
 	}
 	resource = ResourceFactory::GetInstance().Create(now_type);
 	scene = Create(now_type);

@@ -1,5 +1,6 @@
 #include "PlayerTest.h"
 
-PlayerTest::PlayerTest()
+PlayerTest::PlayerTest(Object& object):
+Component(object)
 {
 }
