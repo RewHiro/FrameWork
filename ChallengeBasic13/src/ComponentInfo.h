@@ -5,6 +5,10 @@
 
 class Component;
 
+//
+//　コンポーネント情報
+//
+
 class ComponentInfo :
 	private Uncopyable
 {
@@ -12,8 +16,10 @@ class ComponentInfo :
 public:
 	ComponentInfo();
 
+	//　追加
 	void Add(std::shared_ptr<Component>component);
 
+	//　検索
 	const std::shared_ptr<Component> Find(const std::string& name)const;
 };
 

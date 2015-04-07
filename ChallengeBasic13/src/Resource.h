@@ -17,23 +17,9 @@ protected:
 	std::unordered_map<std::string, Media>bgm_list;
 	std::unordered_map<std::string, Media>se_list;
 
-	static std::string TexturePath(){
-		static std::string texture_path = "res/texture/";
-		return texture_path;
-	}
-	static std::string SoundPath(){
-		static std::string sound_path = "res/sound/";
-		return sound_path;
-	}
-
 public:
 	Resource() = default;
-	virtual ~Resource(){
-		//texture_list.clear();
-		//animation_list.clear();
-		//bgm_list.clear();
-		//se_list.clear();
-	}
+	virtual ~Resource() = default;
 
 	//　テクスチャを取得
 	const Texture& TextureFind(const std::string& name)const{

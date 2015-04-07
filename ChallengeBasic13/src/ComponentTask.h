@@ -1,11 +1,13 @@
 #pragma once
 #include "Uncopyable.h"
 #include <vector>
-#include <unordered_map>
 #include <memory>
 
 class Component;
 
+//　
+//　コンポーネントタスク
+//
 class ComponentTask : private Uncopyable
 {
 	std::vector<std::shared_ptr<Component>>components;
@@ -15,6 +17,7 @@ public:
 	void Start();
 	void Update();
 
+	//　追加
 	void Add(std::shared_ptr<Component>component);
 
 };

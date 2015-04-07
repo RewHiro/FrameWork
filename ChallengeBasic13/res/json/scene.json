@@ -1,0 +1,19 @@
+{
+    "title": {
+        "texture": {
+            "background": "res/texture/game_bg.png",
+            "player": [
+                { "array": "res/texture/miku_1.png" },
+                { "array": "res/texture/miku_2.png" },
+                { "array": "res/texture/miku_3.png" },
+                { "array": "res/texture/miku_4.png" },
+                { "array": "res/texture/miku_5.png" },
+                { "array": "res/texture/miku_6.png" }
+            ]
+        },
+        "sound": {
+            "bgm01": "res/sound/title_bgm.wav",
+            "hit": "res/sound/hit.wav"
+        }
+    }
+}
