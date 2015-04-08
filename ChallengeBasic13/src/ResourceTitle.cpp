@@ -18,7 +18,7 @@ ResourceTitle::ResourceTitle()
 	picojson::array& players = texture["player"].get<picojson::array>();
 	std::vector<Texture>textures;
 	for (auto it = players.begin(); it != players.end();it++){
-		auto tmp_texture = it->get<picojson::object>();
+		auto& tmp_texture = it->get<picojson::object>();
 		textures.emplace_back(tmp_texture["array"].get<std::string>());
 	}
 

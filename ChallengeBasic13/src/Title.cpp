@@ -2,16 +2,18 @@
 #include "Application.h"
 #include "Player.h"
 #include "Background.h"
+#include "Pointer.h"
 #include "ObjectTask.h"
 #include "Resource.h"
 
 Title::Title()
 {
-	auto bgm = resource->BGMFind("title");
+	auto& bgm = resource->BGMFind("title");
 	bgm.looping(true);
 	bgm.play();
 	Object::ObjectAdd("Player", std::make_shared<Player>());
 	Object::ObjectAdd("Background", std::make_shared<Background>());
+	Object::ObjectAdd("Pointer", std::make_shared<Pointer>());
 }
 
 SceneType Title::Update(){
@@ -23,6 +25,9 @@ SceneType Title::Update(){
 	if(Application::isPushButton(Mouse::RIGHT)){
 		resource->SEFind("hit").play();
 	}
+	if(Application::isPushKey('O')){
+		Object::ObjectAdd("Player", std::make_shared<Player>());
+	}
 	Object::GetObjectTask().Update();
 	Object::GetObjectTask().Erase();
 	return Type();
@@ -31,9 +36,4 @@ SceneType Title::Update(){
 void Title::Draw(){
 
 	Object::GetObjectTask().Draw();
-
-	{
-	auto pos = Application::mousePositon();
-	drawFillCircle(pos.x(), pos.y(), 10, 10, 20, Color(1, 1, 1));
-	}
 }

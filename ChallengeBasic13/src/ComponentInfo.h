@@ -17,7 +17,7 @@ public:
 	ComponentInfo();
 
 	//Å@í«â¡
-	void Add(std::shared_ptr<Component>component);
+	void Add(const std::shared_ptr<Component>& component);
 
 	//Å@åüçı
 	const std::shared_ptr<Component> Find(const std::string& name)const;

@@ -7,7 +7,7 @@ object(object)
 }
 
 //　オブジェクトの追加
-void Component::ObjectAdd(const std::string& name, std::shared_ptr<Object>object){
+void Component::ObjectAdd(const std::string& name, const std::shared_ptr<Object>& object){
 	Object::ObjectAdd(name, object);
 }
 

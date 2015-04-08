@@ -7,7 +7,7 @@ ObjectTask::ObjectTask()
 }
 
 //Å@í«â¡
-void ObjectTask::Add(const std::string& name, std::shared_ptr<Object>object){
+void ObjectTask::Add(const std::string& name, const std::shared_ptr<Object>& object){
 	objects.emplace_front(object);
 	objects.sort([](std::weak_ptr<Object> a, std::weak_ptr<Object> b){return a.lock()->SortingNum() > b.lock()->SortingNum(); });
 }
@@ -43,7 +43,7 @@ void ObjectTask::Clear(){
 //Å@çÌèú
 void ObjectTask::Erase(){
 	while(!GetDeleteList().empty()){
-		auto object = GetDeleteList().top();
+		auto& object = GetDeleteList().top();
 		if(object == nullptr){
 			GetDeleteList().pop();
 			continue;

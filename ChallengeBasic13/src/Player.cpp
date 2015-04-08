@@ -4,17 +4,18 @@
 #include "PlayerTest.h"
 #include "Application.h"
 #include "Resource.h"
+#include "Rect.h"
 #include <iostream>
 
 Player::Player() :
 textures(GetResource()->AnimationFind("miku")),
-Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),1)
+Object(Transform2D(Vec2f::Zero(),Vec2f(128,128)),std::make_shared<Rect>(*this),1)
 {
 	ComponentAdd(std::make_shared<PlayerMover>(*this));
 	ComponentAdd(std::make_shared<PlayerTest>(*this));
 }
 
-Player::Player(Transform2D& transform2D) :
+Player::Player(const Transform2D& transform2D) :
 textures(GetResource()->AnimationFind("miku")),
 Object(transform2D, 1)
 {

@@ -8,7 +8,7 @@ class Player :
 	 std::weak_ptr<Object>background;
 public:
 	Player();
-	Player(Transform2D& transform2D);
+	Player(const Transform2D& transform2D);
 	void Start();
 	void Update();
 	void Draw();

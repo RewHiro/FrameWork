@@ -26,6 +26,6 @@ void ComponentTask::Update(){
 	}
 }
 
-void ComponentTask::Add(std::shared_ptr<Component>component){
+void ComponentTask::Add(const std::shared_ptr<Component>& component){
 	components.emplace_back(component);
 }

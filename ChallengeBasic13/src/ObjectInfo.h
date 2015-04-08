@@ -13,7 +13,7 @@ public:
 	ObjectInfo() = default;
 
 	//Å@í«â¡
-	void Add(const std::string& name,const std::shared_ptr<Object>object){
+	void Add(const std::string& name,const std::shared_ptr<Object>& object){
 		object_map.emplace(name, object);
 	}
 
@@ -28,7 +28,7 @@ public:
 	}
 
 	//Å@çÌèú
-	void Erase(const std::shared_ptr<Object>object){
+	void Erase(const std::shared_ptr<Object>& object){
 		auto objects = object_map.equal_range(object->name);
 		auto it = objects.first;
 		while(it != objects.second){

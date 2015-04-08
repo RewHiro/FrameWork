@@ -5,9 +5,8 @@
 #include "Transform2D.h"
 #include "lib\graph.hpp"
 #include  <typeinfo>
-#include <stack>
 
-class Transform2D;
+class Shape;
 class Resource;
 class ObjectTask;
 class ObjectInfo;
@@ -28,6 +27,7 @@ class Object : private Uncopyable, public std::enable_shared_from_this<Object>
 	bool is_delete = false;
 	bool is_active = true;
 	UpdateState update_state = UpdateState::START;
+	std::shared_ptr<Shape>shape;
 protected:
 	ComponentTask component_task;
 	ComponentInfo component_info;
@@ -36,7 +36,7 @@ protected:
 	Color color = Color(1, 1, 1);
 
 	//　コンポーネント追加
-	void ComponentAdd(std::shared_ptr<Component>component);
+	void ComponentAdd(const std::shared_ptr<Component>& component);
 
 	//　更新
 	void ComponetStart();
@@ -44,6 +44,8 @@ protected:
 
 	//　リソースの取得
 	static const std::shared_ptr<Resource> GetResource();
+
+	bool Hit(std::weak_ptr<Object>object);
 
 public:
 	Transform2D transform2D;
@@ -53,6 +55,13 @@ public:
 	Object() = default;
 	Object(const Transform2D& transform2D,int sorting_number = 255):
 		transform2D(transform2D),
+		sorting_number(sorting_number),
+		shape(nullptr)
+	{}
+
+	Object(const Transform2D& transform2D, std::shared_ptr<Shape>shape,int sorting_number = 255) :
+		transform2D(transform2D),
+		shape(shape),
 		sorting_number(sorting_number)
 	{}
 
@@ -103,5 +112,5 @@ public:
 	static void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
 
 	//　オブジェクトの破壊
-	void Destory(std::shared_ptr<Object>object);
+	void Destory(const std::shared_ptr<Object>& object);
 };

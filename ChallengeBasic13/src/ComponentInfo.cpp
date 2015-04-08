@@ -6,7 +6,7 @@ ComponentInfo::ComponentInfo()
 }
 
 //Å@í«â¡
-void ComponentInfo::Add(std::shared_ptr<Component>component){
+void ComponentInfo::Add(const std::shared_ptr<Component>& component){
 	component_list.emplace(component->Name(), component);
 }
 

@@ -3,9 +3,10 @@
 #include "ObjectTask.h"
 #include "Component.h"
 #include "SceneManager.h"
+#include "Shape.h"
 
 //　コンポーネント追加
-void Object::ComponentAdd(std::shared_ptr<Component>component){
+void Object::ComponentAdd(const std::shared_ptr<Component>& component){
 	component_task.Add(component);
 	component_info.Add(component);
 }
@@ -21,6 +22,11 @@ void Object::ComponetnUpdate(){
 //　リソース取得
 const std::shared_ptr<Resource> Object::GetResource(){
 	return SceneManager::GetInstance().GetResource();
+}
+
+bool Object::Hit(std::weak_ptr<Object>object){
+	return false;
+	//return shape->Collision(object.lock()->shape);
 }
 
 ObjectInfo& Object::GetObjectInfo(){
@@ -50,7 +56,7 @@ void Object::ObjectAdd(const std::string& name, std::shared_ptr<Object>object){
 }
 
 //　オブジェクト破壊
-void Object::Destory(std::shared_ptr<Object>object){
+void Object::Destory(const std::shared_ptr<Object>& object){
 	is_delete = !is_delete;
 	GetObjectTask().GetDeleteList().emplace(object);
 }

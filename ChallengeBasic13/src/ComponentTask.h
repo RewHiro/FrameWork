@@ -18,7 +18,7 @@ public:
 	void Update();
 
 	//Å@í«â¡
-	void Add(std::shared_ptr<Component>component);
+	void Add(const std::shared_ptr<Component>& component);
 
 };
 

@@ -10,7 +10,6 @@ class Component : private Uncopyable
 {
 	UpdateState update_state = UpdateState::START;
 protected:
-	Object& object;
 	bool is_active = true;
 	
 	//　オブジェクト取得
@@ -22,18 +21,18 @@ protected:
 	//　コンポーネント取得
 	template <class Type>
 	const std::shared_ptr<Type>GetComponent()const{
-		std::string name = typeid(Type).name();
+		const std::string& name = typeid(Type).name();
 		return std::dynamic_pointer_cast<Type>(object.GetComponentInfo().Find(name.substr(6)));
 	}
 
 	template <class Type>
 	const std::shared_ptr<Type>GetObjectType()const{
-		std::string name = typeid(Type).name();
+		const std::string& name = typeid(Type).name();
 		return std::dynamic_pointer_cast<Type>(ObjectFind(name.substr(6)));
 	}
 
 	//　オブジェクト追加
-	void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
+	void ObjectAdd(const std::string& name, const std::shared_ptr<Object>& object);
 
 public:
 	Component(Object& object);
@@ -45,10 +44,18 @@ public:
 	//　コンポーネントの名前取得
 	virtual std::string Name()const{
 		const std::type_info& id = typeid(*this);
-		std::string name = id.name();
+		const std::string& name = id.name();
 		return name.substr(6);
 	}
 
 	UpdateState& GetUpdateState(){ return update_state; }
+
+	Object& object;
+
+	virtual const std::type_info& This(){
+		return typeid(this);
+	}
+
+
 };
 

@@ -12,11 +12,12 @@ class Object;
 
 class ObjectTask : private Uncopyable
 {
+
 	std::forward_list<std::shared_ptr<Object>>objects;
 public:
 	ObjectTask();
 	//　追加
-	void Add(const std::string& name, std::shared_ptr<Object>object);
+	void Add(const std::string& name, const std::shared_ptr<Object>& object);
 
 	//　更新
 	void Update();
