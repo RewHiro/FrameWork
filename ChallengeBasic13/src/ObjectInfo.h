@@ -18,7 +18,7 @@ public:
 	}
 
 	//@ŒŸõ
-	const std::shared_ptr<Object> Find(const std::string& name)const{
+	const std::shared_ptr<Object>& Find(const std::string& name)const{
 		return object_map.find(name)->second;
 	}
 

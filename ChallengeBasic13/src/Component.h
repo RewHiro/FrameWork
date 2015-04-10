@@ -13,7 +13,7 @@ protected:
 	bool is_active = true;
 	
 	//　オブジェクト取得
-	const std::shared_ptr<Object> ObjectFind(const std::string& name);
+	const std::shared_ptr<Object>& ObjectFind(const std::string& name);
 
 	//　オブジェクト取得
 	const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR>& ObjectFinds(const std::string& name);
@@ -51,10 +51,6 @@ public:
 	UpdateState& GetUpdateState(){ return update_state; }
 
 	Object& object;
-
-	virtual const std::type_info& This(){
-		return typeid(this);
-	}
 
 
 };

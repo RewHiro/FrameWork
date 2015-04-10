@@ -11,9 +11,8 @@ void Component::ObjectAdd(const std::string& name, const std::shared_ptr<Object>
 	Object::ObjectAdd(name, object);
 }
 
-
 //　オブジェクト取得
-const std::shared_ptr<Object> Component::ObjectFind(const std::string& name){
+const std::shared_ptr<Object>& Component::ObjectFind(const std::string& name){
 	return Object::GetObjectInfo().Find(name);
 }
 

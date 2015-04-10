@@ -11,6 +11,6 @@ void ComponentInfo::Add(const std::shared_ptr<Component>& component){
 }
 
 //Å@åüçı
-const std::shared_ptr<Component> ComponentInfo::Find(const std::string& name)const{
+const std::shared_ptr<Component>& ComponentInfo::Find(const std::string& name)const{
 	return component_list.find(name)->second;
 }

@@ -23,7 +23,7 @@ public:
 	}
 
 	//　リソースの取得
-	const std::shared_ptr<Resource> GetResource()const{
+	const std::shared_ptr<Resource>& GetResource()const{
 		return resource;
 	}
 

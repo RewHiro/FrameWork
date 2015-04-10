@@ -20,13 +20,13 @@ void Object::ComponetnUpdate(){
 }
 
 //　リソース取得
-const std::shared_ptr<Resource> Object::GetResource(){
+const std::shared_ptr<Resource>& Object::GetResource(){
 	return SceneManager::GetInstance().GetResource();
 }
 
-bool Object::Hit(std::weak_ptr<Object>object){
-	return false;
-	//return shape->Collision(object.lock()->shape);
+bool Object::Hit(const std::weak_ptr<Object>& object){
+	if (object.lock()->shape.get() == nullptr)return false;;
+	return shape->Hit(*object.lock()->shape.get());
 }
 
 ObjectInfo& Object::GetObjectInfo(){
@@ -39,17 +39,17 @@ ObjectTask& Object::GetObjectTask(){
 }
 
 //　オブジェクト取得
-const std::shared_ptr<Object> Object::ObjectFind(const std::string& name)const{
+const std::shared_ptr<Object>& Object::ObjectFind(const std::string& name)const{
 	return GetObjectInfo().Find(name);
 }
 
 //　オブジェクト取得(複数)
-const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR> Object::ObjectFinds(const std::string& name){
+const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR>& Object::ObjectFinds(const std::string& name){
 	return GetObjectInfo().Finds(name);
 }
 
 //　オブジェクト追加
-void Object::ObjectAdd(const std::string& name, std::shared_ptr<Object>object){
+void Object::ObjectAdd(const std::string& name, const std::shared_ptr<Object>& object){
 	object->name = name;
 	GetObjectInfo().Add(name, object);
 	GetObjectTask().Add(name, object);

@@ -27,6 +27,7 @@ void Player::Start(){
 	ComponetStart();
 	background = ObjectFind("Background");
 	GetComponent<PlayerMover>()->test = true;
+	point = ObjectFind("Pointer");
 }
 
 void Player::Update(){
@@ -36,9 +37,13 @@ void Player::Update(){
 	if(Application::isPushKey('E')){
 		Destory(shared_from_this());
 	}
+
+	color = Hit(point) ? Color(1.0f, .0f, .0f) : Color(1.0f, 1.0f, 1.0f);
 }
 
 void Player::Draw(){
 	drawTextureBox(transform2D.PosX(), transform2D.PosY(), transform2D.SizeX(), transform2D.SizeY(),
 		0, 0, 310, 270, textures.at(frame_count / 30 % 6), color);
+
+	drawBox(transform2D.PosX(), transform2D.PosY(), transform2D.SizeX(), transform2D.SizeY(),5, color);
 }

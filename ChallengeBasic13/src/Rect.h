@@ -2,11 +2,12 @@
 #include "Shape.h"
 class Rect : public Shape
 {
+	bool Collision(const Point& point)const final;
+	//bool Hit(std::weak_ptr<Line>point);
+	bool Collision(const Rect& rect)const final;
+	//bool Hit(std::weak_ptr<Circle>point);
 public:
 	Rect(Object& object);
-	bool Hit(std::weak_ptr<Point>point);
-	bool Hit(std::weak_ptr<Line>point);
-	bool Hit(std::weak_ptr<Rect>point);
-	bool Hit(std::weak_ptr<Circle>point);
+	virtual bool Hit(const Shape& shape)const final;
 };
 

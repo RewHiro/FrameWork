@@ -20,6 +20,6 @@ public:
 	void Add(const std::shared_ptr<Component>& component);
 
 	//@ŒŸõ
-	const std::shared_ptr<Component> Find(const std::string& name)const;
+	const std::shared_ptr<Component>& Find(const std::string& name)const;
 };
 

@@ -43,9 +43,9 @@ protected:
 	void ComponetnUpdate();
 
 	//　リソースの取得
-	static const std::shared_ptr<Resource> GetResource();
+	static const std::shared_ptr<Resource>& GetResource();
 
-	bool Hit(std::weak_ptr<Object>object);
+	bool Hit(const std::weak_ptr<Object>& object);
 
 public:
 	Transform2D transform2D;
@@ -86,9 +86,9 @@ public:
 	UpdateState& GetUpdateState(){ return update_state; }
 
 	//　オブジェクト取得
-	const std::shared_ptr<Object> ObjectFind(const std::string& name)const;
+	const std::shared_ptr<Object>& ObjectFind(const std::string& name)const;
 	//　オブジェクト取得(複数)
-	const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR> ObjectFinds(const std::string& name);
+	const std::pair<OBJECT_MAP_ITR, OBJECT_MAP_ITR>& ObjectFinds(const std::string& name);
 
 	//　コンポーネント取得
 	template <class Type>
@@ -109,7 +109,7 @@ public:
 	}
 	
 	//　オブジェクトの追加
-	static void ObjectAdd(const std::string& name, std::shared_ptr<Object>object);
+	static void ObjectAdd(const std::string& name, const std::shared_ptr<Object>& object);
 
 	//　オブジェクトの破壊
 	void Destory(const std::shared_ptr<Object>& object);
