@@ -1,6 +1,7 @@
 Debug/
 include/
 Windows/
+Release/
 *.exe
 *.ilk
 *.pdb
