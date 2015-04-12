@@ -12,3 +12,6 @@ Windows/
 *.dll
 lib/
 *.opensdf
+*.lastcodeanalysissucceeded
+*.user
+*.psess
